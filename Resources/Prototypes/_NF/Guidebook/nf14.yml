@@ -4,10 +4,12 @@
   text: "/ServerInfo/_NF/Guidebook/NewFrontier14.xml"
   priority: -1
   children: # note: children may be in other files. When adding to this, update the priority of anything after.
+  children: # note: children may be in other files. When adding to this, update the priority of anything after.
   - Bank
   - Hiring
   - Piloting
   - Survival # Moved out from Station and Shifts section (upstream file)
+  - SectorTopology
   - SectorTopology
   - Expeditions
   - CargoHauling # TODO: separate this out along with salvage and mining into some NF_Cargo section
