@@ -167,7 +167,7 @@
   - type: SpawnItemsOnUse
     items:
     # Scrap chunks
-    - id: ScrapOre20
+    - id: ScrapOre20RandomHighTech
       prob: 1.0
     - id: NFWeaponEnergyLightMachineGunTurbo
       prob: 0.1

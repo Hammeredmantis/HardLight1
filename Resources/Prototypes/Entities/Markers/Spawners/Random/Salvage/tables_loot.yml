@@ -65,6 +65,8 @@
       weight: 0.05
     - id: SheetPlasteel10
       weight: 0.05
+    - id: NFScrapSilver # Frontier
+      weight: 2 # Frontier
 
 - type: entityTable
   id: SalvageScrapLarge
@@ -81,6 +83,13 @@
       weight: 0.5
     - id: ScrapMopBucket
       weight: 0.5
+    - id: NFScrapSolarGlass # Frontier
+    - id: ScrapGenericBrokenMachine # Frontier
+      weight: 0.5 # Frontier
+    - id: ScrapGenericBrokenMachineAncient # Frontier
+      weight: 0.25 # Frontier
+    - id: ScrapGenericMachineAncient # Frontier
+      weight: 0.1 # Frontier
 
 # Treasure: High-value scatterables that don't do a ton.
 
@@ -170,6 +179,12 @@
       tableId: PillowTableRare #HL
     - !type:NestedSelector # Frontier
       tableId: TableArtLoot # Frontier, from 500 to 1000 spesos
+      weight: 0.1 # Frontier
+    - id: ScrapGenericBrokenMachine # Frontier
+      weight: 0.5 # Frontier
+    - id: ScrapGenericBrokenMachineAncient # Frontier
+      weight: 0.25 # Frontier
+    - id: ScrapGenericMachineAncient # Frontier
       weight: 0.1 # Frontier
 
 - type: entityTable
