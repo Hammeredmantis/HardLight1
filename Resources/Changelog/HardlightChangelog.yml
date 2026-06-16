@@ -4816,3 +4816,35 @@ Entries:
         them
   id: 515
   time: '2026-06-16T00:12:26.0000000+00:00'
+- author: Shades
+  changes:
+    - type: Add
+      message: >-
+        NullSpace Fixes, Stability Returns, Brighteye are now back with their
+        previous abilities and balanced correctly.
+    - type: Tweak
+      message: >-
+        Security tools related to nullspace entities has been tweaked, check
+        uplink for more details.
+    - type: Add
+      message: Added back PhaseNoms, The Dark, ShadeGen.
+  id: 516
+  time: '2026-06-16T01:49:01.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Tweak
+      message: Vent critters now organize to fuck up one person
+  id: 517
+  time: '2026-06-16T02:06:14.0000000+00:00'
+- author: Hammeredmantis
+  changes:
+    - type: Add
+      message: 'Added the spark of hatred to AI '
+  id: 518
+  time: '2026-06-16T02:06:42.0000000+00:00'
+- author: Typheus
+  changes:
+    - type: Fix
+      message: AI Eye no longer moves around while piloting a ship as an AI Core
+  id: 519
+  time: '2026-06-16T08:22:42.0000000+00:00'

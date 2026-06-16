@@ -51,7 +51,7 @@ namespace Content.Tests.Shared.Chemistry
   color: ""#ffffff""
   spoilConditions:
     bloodstreamPreserve: true
-    spoilTime: ""00:05:00""
+    spoilTime: 300
     spoilsInto: InertNanites
     allowedBloodTypes:
       - Blood
@@ -66,7 +66,6 @@ namespace Content.Tests.Shared.Chemistry
             var proto = (YamlMappingNode)rootNode[0];
 
             var serializationManager = IoCManager.Resolve<ISerializationManager>();
-            serializationManager.Initialize();
 
             var newReagent = serializationManager.Read<ReagentPrototype>(new MappingDataNode(proto));
 
