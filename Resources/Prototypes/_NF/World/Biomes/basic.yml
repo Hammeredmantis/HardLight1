@@ -18,7 +18,7 @@
   id: NFAsteroidsNear
   parent: NFBiomeBase
   priority: 2
-  distanceRange: 0, 5000
+  distanceRange: 0, 2000
   chunkComponents:
   - type: SimpleDebrisSelector
     debrisTable:
@@ -91,7 +91,7 @@
   id: NFAsteroidsMid
   parent: NFBiomeBase
   priority: 1
-  distanceRange: 5000, 9500
+  distanceRange: 2000, 5500
   chunkComponents:
   - type: SimpleDebrisSelector
     debrisTable:
@@ -361,4 +361,28 @@
       orGroup: wreck
     - id: NFWreckDebrisBrassExtraLarge
       prob: 0.1
+      orGroup: wreck
+# Xenoborg combat drones - very rare encounters in deep space (beyond 5K)
+    - id: XenoborgDroneLbit
+      prob: 0.005
+      orGroup: wreck
+    - id: XenoborgDroneLbyte
+      prob: 0.05
+    - id: XenoborgDroneMbyte
+      prob: 0.03
+      orGroup: wreck
+    - id: XenoborgDroneMgbyte
+      prob: 0.02
+      orGroup: wreck
+    - id: XenoborgDroneMtbyte
+      prob: 0.01
+      orGroup: wreck
+    - id: XenoborgTransistorHub
+      prob: 0.01
+    - id: XenoborgDroneSgbyte
+      prob: 0.02
+      orGroup: wreck
+    # Regular wrecks
+    - id: MonoRamDroneSpawnerT1 # Mono
+      prob: 0.15
       orGroup: wreck
