@@ -17,7 +17,6 @@
   spawnGroup: CargoDepot
   gridPath: /Maps/_NF/POI/cargodepot.yml
   addComponents: &cargoComponents
-  addComponents: &cargoComponents
   - type: IFF
     color: "#37C837"
   - type: ProtectedGrid
