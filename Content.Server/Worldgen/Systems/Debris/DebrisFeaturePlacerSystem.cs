@@ -11,7 +11,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._NF.Worldgen.Components.Debris; // Frontier
-using Content.Server._NF.Shuttles.Components;
 
 namespace Content.Server.Worldgen.Systems.Debris;
 
@@ -39,10 +38,18 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
         SubscribeLocalEvent<DebrisFeaturePlacerControllerComponent, WorldChunkUnloadedEvent>(OnChunkUnloaded);
         SubscribeLocalEvent<OwnedDebrisComponent, ComponentShutdown>(OnDebrisShutdown);
         SubscribeLocalEvent<OwnedDebrisComponent, MoveEvent>(OnDebrisMove);
+        SubscribeLocalEvent<OwnedDebrisComponent, TryCancelGC>(OnTryCancelGC);
         SubscribeLocalEvent<SimpleDebrisSelectorComponent, TryGetPlaceableDebrisFeatureEvent>(
             OnTryGetPlacableDebrisEvent);
     }
 
+    /// <summary>
+    ///     Handles GC cancellation in case the chunk is still loaded.
+    /// </summary>
+    private void OnTryCancelGC(EntityUid uid, OwnedDebrisComponent component, ref TryCancelGC args)
+    {
+        args.Cancelled |= HasComp<LoadedChunkComponent>(component.OwningController);
+    }
     /// <summary>
     ///     Handles debris moving, and making sure it stays parented to a chunk for loading purposes.
     /// </summary>
@@ -175,19 +182,13 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
 
         var safetyBounds = Box2.UnitCentered.Enlarged(component.SafetyZoneRadius);
         var failures = 0; // Avoid severe log spam.
-        var spawned = 0; // Track number of spawned debris
         foreach (var point in points)
         {
             if (component.OwnedDebris.TryGetValue(point, out var existing))
             {
                 DebugTools.Assert(Exists(existing));
-                spawned++;
                 continue;
             }
-
-            // Check if we've reached the maximum debris count
-            if (component.MaxDebrisCount.HasValue && spawned >= component.MaxDebrisCount.Value)
-                break;
 
             var pointDensity = _noiseIndex.Evaluate(uid, densityChannel, WorldGen.WorldToChunkCoords(point));
             if (pointDensity == 0 && component.DensityClip || _random.Prob(component.RandomCancellationChance))
@@ -230,10 +231,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
             owned.OwningController = uid;
             owned.LastKey = point;
 
-            EnsureComp<ForceAnchorComponent>(ent);
-
             EnsureComp<SpaceDebrisComponent>(ent); // Frontier
-            spawned++;
         }
 
         if (failures > 0)
@@ -261,8 +259,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
         var offs = (int) ((WorldGen.ChunkSize - WorldGen.ChunkSize / 8.0f) / 2.0f);
         var topLeft = new Vector2(-offs, -offs);
         var lowerRight = new Vector2(offs, offs);
-        // Double the minimum distance between asteroids
-        var enumerator = _sampler.SampleRectangle(topLeft, lowerRight, density * 2.0f);
+        var enumerator = _sampler.SampleRectangle(topLeft, lowerRight, density);
         var debrisPoints = new List<Vector2>();
 
         var realCenter = WorldGen.ChunkToWorldCoordsCentered(coords.Floored());
