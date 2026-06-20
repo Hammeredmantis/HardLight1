@@ -368,6 +368,7 @@
       orGroup: wreck
     - id: XenoborgDroneLbyte
       prob: 0.05
+      orGroup: wreck
     - id: XenoborgDroneMbyte
       prob: 0.03
       orGroup: wreck
@@ -379,7 +380,11 @@
       orGroup: wreck
     - id: XenoborgTransistorHub
       prob: 0.01
+      orGroup: wreck
     - id: XenoborgDroneSgbyte
+      prob: 0.02
+      orGroup: wreck
+    - id: XenoborgDroneLgbyte
       prob: 0.02
       orGroup: wreck
     # Regular wrecks
