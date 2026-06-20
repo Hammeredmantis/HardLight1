@@ -2421,7 +2421,7 @@
     reoccurrenceDelay: 200
     minimumPlayers: 40
     weight: 6 # Really weak compared to other critters
-    duration: 10
+    duration: 60
   - type: VentHordeRule
     table: !type:GroupSelector
       rolls: !type:RangeNumberSelector
