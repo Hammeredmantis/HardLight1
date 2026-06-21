@@ -183,13 +183,18 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
 
         var safetyBounds = Box2.UnitCentered.Enlarged(component.SafetyZoneRadius);
         var failures = 0; // Avoid severe log spam.
+        var spawned = 0; // Track number of spawned debris
         foreach (var point in points)
         {
             if (component.OwnedDebris.TryGetValue(point, out var existing))
             {
                 DebugTools.Assert(Exists(existing));
+                spawned++;
                 continue;
             }
+             // Check if we've reached the maximum debris count
+            if (component.MaxDebrisCount.HasValue && spawned >= component.MaxDebrisCount.Value)
+                break;
 
             var pointDensity = _noiseIndex.Evaluate(uid, densityChannel, WorldGen.WorldToChunkCoords(point));
             if (pointDensity == 0 && component.DensityClip || _random.Prob(component.RandomCancellationChance))
@@ -235,6 +240,7 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
             EnsureComp<ForceAnchorComponent>(ent);
 
             EnsureComp<SpaceDebrisComponent>(ent); // Frontier
+            spawned++;
         }
 
         if (failures > 0)
