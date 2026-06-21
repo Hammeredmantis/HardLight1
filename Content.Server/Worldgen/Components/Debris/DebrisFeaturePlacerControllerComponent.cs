@@ -37,7 +37,7 @@ public sealed partial class DebrisFeaturePlacerControllerComponent : Component
     /// <summary>
     ///     Maximum number of debris entities that can be spawned per chunk. Null means no limit.
     /// </summary>
-    [DataField("maxDebrisCount")] public int? MaxDebrisCount = 15;
+    [DataField("maxDebrisCount")] public int? MaxDebrisCount = 18;
 
     /// <summary>
     ///     The noise channel to use as a density controller.
